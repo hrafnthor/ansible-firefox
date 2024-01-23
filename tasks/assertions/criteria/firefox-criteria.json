@@ -14,33 +14,7 @@
         },
         "esr":
         {
-            "type": "object",
-            "properties":
-            {
-                "signing":
-                {
-                    "type": "object",
-                    "properties":
-                    {
-                        "path":
-                        {
-                            "$ref": "#/definitions/non-empty-string"
-                        },
-                        "force":
-                        {
-                            "type": "boolean"
-                        }
-                    },
-                    "required":
-                    [
-                        "path"
-                    ]
-                }
-            },
-            "required":
-            [
-                "signing"
-            ]
+            "type": "boolean"
         },
         "mozilla":
         {

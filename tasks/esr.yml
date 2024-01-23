@@ -1,0 +1,31 @@
+# This file contains tasks related to configuring and installing Firefox-ESR from
+# the MozillaTeam PPA.
+#
+# See more:
+# https://launchpad.net/~mozillateam/+archive/ubuntu/ppa.
+
+- name: Firefox | ESR | Add PPA repository
+  ansible.builtin.apt_repository:
+    repo: ppa:mozillateam/ppa
+  when:
+   - "'firefox-esr' not in ansible_facts.packages"
+   - firefox.esr is defined
+   - firefox.esr
+
+- name: Firefox | ESR | Install package
+  ansible.builtin.apt:
+    name: firefox-esr
+    state: latest
+  when:
+    - "'firefox-esr' not in ansible_facts.packages"
+    - firefox.esr is defined
+    - firefox.esr
+
+- name: Firefox | ESR | Remove package
+  ansible.builtin.apt:
+    name: firefox-esr
+    state: absent
+  when:
+    - "'firefox-esr' in ansible_facts.packages"
+    - firefox.esr is defined
+    - not firefox.esr

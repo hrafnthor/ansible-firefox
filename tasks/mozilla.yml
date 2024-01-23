@@ -40,7 +40,7 @@
     - firefox.mozilla.priority is defined
     - firefox.mozilla.priority
 
-- name: Firefox | Mozilla | Install Firefox
+- name: Firefox | Mozilla | Install package
   ansible.builtin.apt:
     name: firefox
     state: latest

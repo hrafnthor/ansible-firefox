@@ -8,6 +8,16 @@
     manager: "auto"
   when: firefox.gather_facts is not defined or firefox.gather_facts
 
+- ansible.builtin.import_tasks: snap.yml
+  when:
+    - firefox.snap is defined
+    - ansible_distribution in ['Debian', 'Ubuntu']
+
+- ansible.builtin.import_tasks: esr.yml
+  when:
+    - firefox.esr is defined
+    - ansible_distribution in ['Debian', 'Ubuntu']
+
 - ansible.builtin.import_tasks: mozilla.yml
   when:
     - firefox.mozilla is defined
