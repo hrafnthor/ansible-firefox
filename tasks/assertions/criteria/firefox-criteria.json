@@ -1,0 +1,88 @@
+{
+    "title": "firefox",
+    "descriptions": "schema for firefox installation",
+    "type": "object",
+    "properties":
+    {
+        "gather_facts":
+        {
+            "type": "boolean"
+        },
+        "snap":
+        {
+            "type": "boolean"
+        },
+        "esr":
+        {
+            "type": "object",
+            "properties":
+            {
+                "signing":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "path":
+                        {
+                            "$ref": "#/definitions/non-empty-string"
+                        },
+                        "force":
+                        {
+                            "type": "boolean"
+                        }
+                    },
+                    "required":
+                    [
+                        "path"
+                    ]
+                }
+            },
+            "required":
+            [
+                "signing"
+            ]
+        },
+        "mozilla":
+        {
+            "type": "object",
+            "properties":
+            {
+                "priority":
+                {
+                    "type": "boolean"
+                },
+                "signing":
+                {
+                    "type": "object",
+                    "properties":
+                    {
+                        "path":
+                        {
+                            "$ref": "#/definitions/non-empty-string"
+                        },
+                        "force":
+                        {
+                            "type": "boolean"
+                        }
+                    },
+                    "required":
+                    [
+                        "path"
+                    ]
+                }
+            },
+            "required":
+            [
+                "signing"
+            ]
+        }
+    },
+    "definitions":
+    {
+        "non-empty-string":
+        {
+            "type": "string",
+            "minLength": 1
+        }
+    }
+}

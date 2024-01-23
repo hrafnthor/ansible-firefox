@@ -1,0 +1,47 @@
+# This file conatins tasks related to configuring and installing Firefox directly
+# from Mozilla's own package repository.
+#
+# See more:
+# https://support.mozilla.org/en-US/kb/install-firefox-linux
+
+- name: Firefox | Mozilla | Assure keyrings folder
+  ansible.builtin.file:
+    path: "/etc/apt/keyrings"
+    state: directory
+    owner: root
+    group: root
+    mode: 0755
+    modification_time: preserve
+    access_time: preserve
+
+- name: Firefox | Mozilla | Add repository signing key
+  ansible.builtin.copy:
+    src: "{{ firefox.mozilla.signing.path }}"
+    dest: "/etc/apt/keyrings/packages.mozilla.org.asc"
+    force: "{{ firefox.mozilla.signing.force | default(false) }}"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Firefox | Mozilla | Add repository to sources
+  ansible.builtin.apt_repository:
+    repo: "deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main"
+    state: present
+    filename: mozilla
+
+- name: Firefox | Mozilla | Prioritize repository
+  ansible.builtin.copy:
+    src: mozilla
+    dest: "/etc/apt/preferences.d/mozilla"
+    owner: root
+    group: root
+    mode: 0644
+  when:
+    - firefox.mozilla.priority is defined
+    - firefox.mozilla.priority
+
+- name: Firefox | Mozilla | Install Firefox
+  ansible.builtin.apt:
+    name: firefox
+    state: latest
+    update_cache: yes

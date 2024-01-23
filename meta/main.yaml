@@ -1,0 +1,6 @@
+galaxy_info:
+  author: Hrafn Thorvaldsson
+  description: An Ansible role for installing Firefox from various sources
+  license: Apache-2.0
+  min_ansible_version: 2.1
+  galaxy_tags: [firefox,firefox-esr,mozilla,debian]
