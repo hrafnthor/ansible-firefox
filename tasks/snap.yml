@@ -1,0 +1,18 @@
+# This file contains configuration tasks related to installation of Firefox
+# via Canonical's Snap packages.
+
+- name: Firefox | Snap | Install package
+  community.general.snap:
+    name: firefox
+    state: latest
+  when:
+    - firefox.snap is defined
+    - firefox.snap
+
+- name: Firefox | Snap | Remove package
+  community.general.snap:
+    name: firefox
+    state: absent
+  when:
+    - firefox.snap is defined
+    - not firefox.snap
