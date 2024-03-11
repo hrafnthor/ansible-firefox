@@ -11,7 +11,7 @@
   ansible.utils.validate:
     data: "{{ firefox }}"
     criteria:
-      - "{{ lookup('file',  './criteria/firefox-criteria.json') | from_json }}"
+      - "{{ lookup('file',  'assertions/criteria/firefox-criteria.json') | from_json }}"
     engine: ansible.utils.jsonschema
   when:
   - firefox is defined
