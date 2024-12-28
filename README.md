@@ -46,39 +46,17 @@ Role Variables
 
 #### Input variables
 
+Values are optional unless marked otherwise.
+
 ```
-gather_facts	[optional] (boolean)
-
-				Indicates if this role should gather facts or rely on present facts.
-
+gather_facts	[optional] (boolean)  Indicates if this role should gather facts or rely on present facts.
 mozilla
-
-	signing 	[required]
-
-		path 	[required] (string)
-
-				The absolute file path to the signing key used by Mozilla.
-				This key can be found at: https://packages.mozilla.org/apt/repo-signing-key.gpg
-
-		force	[optional] (boolean)
-
-				Indicates if the signing key should override any other key found.
-
-	priority	[optional] (boolean)
-
-				Indicates if this repository should be given priority over any other.
-
-snap			[optional] (boolean)
-
-				Indicates if Firefox should be installed from the Snap store.
-
-				If false and Firefox is installed from the Snap, it will be uninstalled.
-
-esr				[optional] (boolean)
-
-				Indicates if Firefox-ESR should be installed from the MozillaTeam PPA (https://launchpad.net/~mozillateam/+archive/ubuntu/ppa).
-
-				If false and Firefox-ESR is installed, it will be uninstalled.
+  signing 	[required]
+    path 	[required] (string)   The absolute file path to the signing key used by Mozilla. This key can be found at: https://packages.mozilla.org/apt/repo-signing-key.gpg
+    force	           (boolean)  Indicates if the signing key should override any other key found.
+  priority	           (boolean)  Indicates if this repository should be given priority over any other.
+snap		           (boolean)  Indicates if Firefox should be installed from the Snap store. If false and Firefox is installed from the Snap, it will be uninstalled.
+esr		           (boolean)  Indicates if Firefox-ESR should be installed from the MozillaTeam PPA (https://launchpad.net/~mozillateam/+archive/ubuntu/ppa). If false and Firefox-ESR is installed, it will be uninstalled.
 ```
 
 
@@ -88,10 +66,10 @@ esr				[optional] (boolean)
 firefox:
   gather_facts: false
   mozilla:
-  	signing:
-  		path: "/path/to/mozilla/signing/key.gpg"
-  		force: false
-  	priority: true
+    signing:
+      path: "/path/to/mozilla/signing/key.gpg"
+      force: false
+    priority: true
   snap: false
   esr: true
 ```
@@ -105,16 +83,16 @@ Example Playbook
 - hosts: all
     vars:
     - firefox:
-		gather_facts: false
-		mozilla:
-			signing:
-				path: "/path/to/mozilla/signing/key.gpg"
-				force: false
-			priority: true
-		snap: false
-		esr: true
+        gather_facts: false
+        mozilla:
+          signing:
+            path: "/path/to/mozilla/signing/key.gpg"
+            force: false
+          priority: true
+        snap: false
+        esr: true
   roles:
-     - hth-firefox
+  - hth-firefox
 ```
 
 
