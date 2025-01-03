@@ -1,12 +1,18 @@
-- name: Firefox | Assert required inputs
-  ansible.builtin.import_tasks: assertions/assert.yml
+- name: "Firefox | Run assertions"
+  ansible.utils.validate:
+    data: "{{ firefox }}"
+    criteria: "{{ lookup('file', 'assertions/criteria/firefox-criteria.json') | from_json }}"
+    engine: ansible.utils.jsonschema
   run_once: yes
   delegate_to: localhost
+  when:
+    - firefox is defined
 
-- name: Firefox | Gather package facts
+- name: "Firefox | Gather package facts"
   ansible.builtin.package_facts:
     manager: "auto"
-  when: firefox.gather_facts is not defined or firefox.gather_facts
+  when: 
+    - firefox.gather_facts is not defined or firefox.gather_facts
 
 - ansible.builtin.import_tasks: snap.yml
   when:
