@@ -1,3 +1,8 @@
 Package: firefox
 Pin: origin packages.mozilla.org
 Pin-Priority: 1000
+
+# Block all other packages
+Package: *
+Pin: origin packages.mozilla.org
+Pin-Priority: -1
