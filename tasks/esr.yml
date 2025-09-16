@@ -4,7 +4,7 @@
 # See more:
 # https://launchpad.net/~mozillateam/+archive/ubuntu/ppa.
 
-- name: Firefox | ESR | Add PPA repository
+- name: "HTH | Firefox | Add ESR PPA repository"
   ansible.builtin.apt_repository:
     repo: ppa:mozillateam/ppa
   when:
@@ -12,7 +12,7 @@
    - firefox.esr is defined
    - firefox.esr
 
-- name: Firefox | ESR | Install package
+- name: "HTH | Firefox | Install ESR package"
   ansible.builtin.apt:
     name: firefox-esr
     state: latest
@@ -21,7 +21,7 @@
     - firefox.esr is defined
     - firefox.esr
 
-- name: Firefox | ESR | Remove package
+- name: "HTH | Firefox | Remove ESR package"
   ansible.builtin.apt:
     name: firefox-esr
     state: absent

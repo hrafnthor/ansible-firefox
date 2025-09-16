@@ -1,4 +1,4 @@
-- name: "Firefox | Run assertions"
+- name: "HTH | Firefox | Run assertions"
   ansible.utils.validate:
     data: "{{ firefox }}"
     criteria: "{{ lookup('file', 'assertions/criteria/firefox-criteria.json') | from_json }}"
@@ -8,10 +8,10 @@
   when:
     - firefox is defined
 
-- name: "Firefox | Gather package facts"
+- name: "HTH | Firefox | Gather package facts"
   ansible.builtin.package_facts:
     manager: "auto"
-  when: 
+  when:
     - firefox.gather_facts is not defined or firefox.gather_facts
 
 - ansible.builtin.import_tasks: snap.yml
