@@ -1,7 +1,7 @@
 # This file contains configuration tasks related to installation of Firefox
 # via Canonical's Snap packages.
 
-- name: Firefox | Snap | Install package
+- name: "HTH | Firefox | Install snap package"
   community.general.snap:
     name: firefox
     state: latest
@@ -9,7 +9,7 @@
     - firefox.snap is defined
     - firefox.snap
 
-- name: Firefox | Snap | Remove package
+- name: "HTH | Firefox | Remove snap package"
   community.general.snap:
     name: firefox
     state: absent

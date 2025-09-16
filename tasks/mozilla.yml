@@ -4,7 +4,7 @@
 # See more:
 # https://support.mozilla.org/en-US/kb/install-firefox-linux
 
-- name: Firefox | Mozilla | Assure keyrings folder
+- name: "HTH | Firefox | Assure APT keyrings folder"
   ansible.builtin.file:
     path: "/etc/apt/keyrings"
     state: directory
@@ -14,7 +14,7 @@
     modification_time: preserve
     access_time: preserve
 
-- name: Firefox | Mozilla | Add repository signing key
+- name: "HTH | Firefox | Add Mozilla repository signing key"
   ansible.builtin.copy:
     src: "{{ firefox.mozilla.signing.path }}"
     dest: "/etc/apt/keyrings/packages.mozilla.org.asc"
@@ -23,13 +23,13 @@
     group: root
     mode: 0644
 
-- name: Firefox | Mozilla | Add repository to sources
+- name: "HTH | Firefox | Add Mozilla repository to sources"
   ansible.builtin.apt_repository:
     repo: "deb [signed-by=/etc/apt/keyrings/packages.mozilla.org.asc] https://packages.mozilla.org/apt mozilla main"
     state: present
     filename: mozilla
 
-- name: Firefox | Mozilla | Prioritize repository
+- name: "HTH | Firefox | Prioritize Mozilla repository"
   ansible.builtin.copy:
     src: mozilla
     dest: "/etc/apt/preferences.d/mozilla"
@@ -40,7 +40,7 @@
     - firefox.mozilla.priority is defined
     - firefox.mozilla.priority
 
-- name: Firefox | Mozilla | Install package
+- name: "HTH | Firefox | Install Mozilla package"
   ansible.builtin.apt:
     name: firefox
     state: latest
