@@ -14,6 +14,19 @@
   when:
     - firefox.gather_facts is not defined or firefox.gather_facts
 
+- name: "HTH | Firefox | Look up installed package version"
+  ansible.builtin.shell:
+    cmd: dpkg-query -W -f='${Version}' firefox 2>/dev/null
+  register: firefox_version
+
+# Note: ansible.builtin.dpkg_selections does not seem to work for
+#       purging the package.
+- name: "HTH | Firefox | Remove snap transition package"
+  ansible.builtin.shell:
+    cmd: dpkg --purge firefox
+  when:
+    - firefox_version.stdout == '1:1snap1-0ubuntu5'
+
 - ansible.builtin.import_tasks: snap.yml
   when:
     - firefox.snap is defined
